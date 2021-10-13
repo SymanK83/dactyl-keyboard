@@ -69,7 +69,7 @@ def debugprint(info):
         print(info)
 
 
-if oled_mount_type is not None:
+if oled_mount_type is not None and oled_mount_type != "NONE":
     for item in oled_configurations[oled_mount_type]:
         locals()[item] = oled_configurations[oled_mount_type][item]
 

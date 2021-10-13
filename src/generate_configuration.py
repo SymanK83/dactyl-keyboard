@@ -7,8 +7,8 @@ r2d = 180 / pi
 
 shape_config = {
 
-    'ENGINE': 'solid', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
-    # 'ENGINE':  'cadquery', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    # 'ENGINE': 'solid', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    'ENGINE':  'cadquery', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
 
 
     ######################
@@ -20,8 +20,8 @@ shape_config = {
 
     'show_caps':  False,
 
-    'nrows':  5, #5,  # key rows
-    'ncols':  6, #6,  # key columns
+    'nrows':  3, #5,  # key rows
+    'ncols':  7, #6,  # key columns
 
     'alpha':  pi / 12.0,  # curvature of the columns
     'beta':  pi / 36.0,  # curvature of the rows
@@ -100,7 +100,7 @@ shape_config = {
     # 'HS_NUB' = hot swap underside with nubs.
     # 'HS_UNDERCUT' = hot swap underside with undercut. Does not generate properly.  Hot swap step needs to be modified.
     # 'HS_NOTCH' = hot swap underside with notch.  Does not generate properly.  Hot swap step needs to be modified.
-    'plate_style':  'NOTCH',
+    'plate_style':  'NUB',
 
     'hole_keyswitch_height':  14.0,
     'hole_keyswitch_width':  14.0,
@@ -137,7 +137,7 @@ shape_config = {
     # 'SLIDING' = Features to slide the OLED in place and use a pin or block to secure from underneath.
     # 'CLIP' = Features to set the OLED in a frame a snap a bezel down to hold it in place.
 
-    'oled_mount_type':  'CLIP',
+    'oled_mount_type':  None,
     'oled_center_row': 1.5, # if not None, this will override the oled_mount_location_xyz and oled_mount_rotation_xyz settings
     'oled_translation_offset': (0, 0, 4), # Z offset tweaks are expected depending on curvature and OLED mount choice.
     'oled_rotation_offset': (0, 0, 0),
