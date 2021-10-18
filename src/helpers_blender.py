@@ -1,4 +1,12 @@
-import solid as sl
+import bpy
+import bmesh
+import os
+import sys
+import time
+import mathutils
+from math import pi, radians, sin, cos
+from contextlib import contextmanager
+
 
 debug_trace = False
 
@@ -7,11 +15,14 @@ def debugprint(info):
         print(info)
 
 def box(width, height, depth):
-    return sl.cube([width, height, depth], center=True)
+    return bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0, 0), scale=(width, height, depth))
 
 
 def cylinder(radius, height, segments=100):
-    return sl.cylinder(r=radius, h=height, segments=segments, center=True)
+    return bpy.ops.mesh.primitive_cylinder_add(
+        vertices=segments, radius=radius, depth=height, location=(0, 0, 0), rotation=(0, 0, 0)
+    )
+
 
 
 def sphere(radius):
@@ -23,12 +34,15 @@ def cone(r1, r2, height):
 
 
 def rotate(shape, angle):
-    return sl.rotate(angle)(shape)
-
+    bpy.ops.transform.rotate(value=-radians(angle[0]), orient_axis='X', center_override=(0.0, 0.0, 0.0))
+    bpy.ops.transform.rotate(value=-radians(angle[1]), orient_axis='Y', center_override=(0.0, 0.0, 0.0))
+    bpy.ops.transform.rotate(value=-radians(angle[2]), orient_axis='Z', center_override=(0.0, 0.0, 0.0))
+    return
 
 def translate(shape, vector):
-    return sl.translate(tuple(vector))(shape)
 
+    bpy.ops.transform.translate(value=vector, orient_type='GLOBAL', orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)), orient_matrix_type='GLOBAL', mirror=True, use_proportional_edit=False, proportional_edit_falloff='SMOOTH', proportional_size=1, use_proportional_connected=False, use_proportional_projected=False)
+    return
 
 def mirror(shape, plane=None):
     debugprint('mirror()')
@@ -73,7 +87,7 @@ def difference(shape, shapes):
 
 
 def intersect(shape1, shape2):
-    return sl.intersection()(shape1, shape2)
+    return sl.intersect()(shape1, shape2)
 
 
 def hull_from_points(points):
@@ -102,21 +116,6 @@ def triangle_hulls(shapes):
     return union(hulls)
 
 
-
-def bottom_hull(p, height=0.001):
-    debugprint("bottom_hull()")
-    shape = None
-    for item in p:
-        proj = sl.projection()(p)
-        t_shape = sl.linear_extrude(height=height, twist=0, convexity=0, center=True)(
-            proj
-        )
-        t_shape = sl.translate([0, 0, height / 2 - 10])(t_shape)
-        if shape is None:
-            shape = t_shape
-        shape = sl.hull()(p, shape, t_shape)
-    return shape
-
 def polyline(point_list):
     return sl.polygon(point_list)
 
@@ -133,9 +132,9 @@ def extrude_poly(outer_poly, inner_polys=None, height=1):
         return sl.linear_extrude(height=height, twist=0, convexity=0, center=True)(outer_poly)
 
 
-def import_file(fname, convexity=2):
+def import_file(fname, convexity=5):
     print("IMPORTING FROM {}".format(fname))
-    return sl.import_stl(fname + ".stl", convexity=convexity)
+    return sl.import_(fname + ".stl", convexity=convexity)
 
 
 def export_file(shape, fname):

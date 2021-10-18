@@ -9,7 +9,13 @@
 *.scad
 /target
 .idea/
+.DS_Store
 *.FCStd1
 debug_*
 */__pycache__/*
 *~$*
+things/
+.DS_Store
+things/*.scad
+things/*.step
+things/*.stl

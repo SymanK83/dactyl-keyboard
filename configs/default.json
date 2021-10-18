@@ -1,7 +1,7 @@
 {
     "ENGINE": "solid",
-    "save_dir": ".",
-    "config_name": "DM",
+    "save_dir": "default",
+    "config_name": "default",
     "show_caps": true,
     "show_pcbs": false,
     "nrows": 5,
@@ -20,7 +20,7 @@
         7
     ],
     "keyboard_z_offset": 11,
-    "thumb_style": "TRACKBALL_ORBYL",
+    "thumb_style": "DEFAULT",
     "default_1U_cluster": true,
     "minidox_Usize": 1.6,
     "thumb_plate_tr_rotation": 0.0,
