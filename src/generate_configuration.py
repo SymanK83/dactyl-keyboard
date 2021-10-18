@@ -10,8 +10,8 @@ r2d = 180 / pi
 
 shape_config = {
 
-    # 'ENGINE': 'solid', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
-    'ENGINE':  'cadquery', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    'ENGINE': 'solid', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    # 'ENGINE':  'cadquery', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
 
 
     ######################
@@ -21,10 +21,10 @@ shape_config = {
     'save_dir': '.',
     'config_name':  "DM",
 
-    'show_caps': True,
+    'show_caps': False,
     'show_pcbs': False, #only runs if caps are shown, easist place to initially inject geometry
 
-    'nrows':  3, #5,  # key rows
+    'nrows':  4, #5,  # key rows
     'ncols':  7, #6,  # key columns
 
     'alpha':  pi / 12.0,  # curvature of the columns
@@ -36,7 +36,7 @@ shape_config = {
     # symmetry states if it is a symmetric or asymmetric bui.  If asymmetric it doubles the generation time.
     'symmetry':  "symmetric",  # "asymmetric" or "symmetric"
 
-    'column_style_gt5':  "orthographic",
+    'column_style_gt5':  "standard",
     'column_style':  "standard",  # options include :standard, :orthographic, and :fixed
 
     'thumb_offsets':  [6, -3, 7],
@@ -48,7 +48,7 @@ shape_config = {
     # THUMB PARAMETERS
     ##############################
     # 'DEFAULT' 6-key, 'MINI' 5-key, 'CARBONFET' 6-key, 'MINIDOX' 3-key, 'TRACKBALL_ORBYL', 'TRACKBALL_CJ'
-    'thumb_style': 'TRACKBALL_ORBYL',
+    'thumb_style': 'MINI',
     'default_1U_cluster': True, # only used with default, makes top right thumb cluster key 1U
     # Thumb key size.  May need slight oversizing, check w/ caps.  Additional spacing will be automatically added for larger keys.
     'minidox_Usize': 1.6,
@@ -63,7 +63,7 @@ shape_config = {
     ###################################
     ## Trackball in Wall             ##
     ###################################
-    'trackball_in_wall': False,  # Separate trackball option, placing it in the OLED area
+    'trackball_in_wall': True,  # Separate trackball option, placing it in the OLED area
     'tbiw_ball_center_row': 0.2, # up from cornerrow instead of down from top
     'tbiw_translational_offset': (0.0, 0.0, 0.0),
     'tbiw_rotation_offset': (0.0, 0.0, 0.0),
@@ -79,7 +79,7 @@ shape_config = {
     ###########################################
     ## Trackball JS / ORBYL Thumb Cluster    ##
     ##########################################
-    'other_thumb': 'DEFAULT', # cluster used for second thumb except if ball_side == 'both'
+    'other_thumb': 'TRACKBALL_ORBYL', # cluster used for second thumb except if ball_side == 'both'
     'tbjs_key_diameter': 70,
     # Offsets are per key and are applied before rotating into place around the ball
     # X and Y act like Tangential and Radial around the ball
@@ -113,13 +113,14 @@ shape_config = {
     'trackball_modular': False, # May add removable trackball in subsequent releases, no current use.
     # END EXPERIMENTAL
 
+    'trackball_bearing_type': 'R053010810', # 'ROLLER' Standard Ploopy, 'R053010810' Bosch Rexroth
     'trackball_Usize': 1.5,  # size for inner key near trackball
-    'ball_side': 'right', #'left', 'right', or 'both'
+    'ball_side': 'both', #'left', 'right', or 'both'
     'ball_diameter': 34.0,
     'ball_wall_thickness': 3,  # should not be changed unless the import models are changed.
     'ball_gap': 1.0,
     'trackball_hole_diameter': 36.5,
-    'trackball_hole_height': 40,
+    'trackball_hole_height': 80,
     'trackball_plate_thickness': 2,
     'trackball_plate_width': 2,
     # Removed trackball_rotation, ball_z_offset. and trackball_sensor_rotation and added more flexibility.
@@ -321,7 +322,7 @@ shape_config = {
     # 'USB_TEENSY' = Teensy holder, no RJ9
     # 'EXTERNAL' = square cutout for a holder such as the one from lolligagger.
     # 'NONE' = No openings in the back.
-    'controller_mount_type':  'EXTERNAL',
+    'controller_mount_type':  'NONE',
 
     'external_holder_height':  12.5,
     'external_holder_width':  28.75,

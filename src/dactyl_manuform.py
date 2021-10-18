@@ -284,9 +284,9 @@ def trackball_socket(segments=100, side="right"):
 
     tb_file = path.join(parts_path, r"trackball_socket_body_34mm")
     tbcut_file = path.join(parts_path, r"trackball_socket_cutter_34mm")
+    tbbtu_file = path.join(parts_path, r"R053010810")
     sens_file = path.join(parts_path, r"trackball_sensor_mount")
     senscut_file = path.join(parts_path, r"trackball_sensor_cutter")
-
 
     # shape = import_file(tb_file)
     # # shape = difference(shape, [import_file(senscut_file)])
@@ -294,15 +294,19 @@ def trackball_socket(segments=100, side="right"):
     # cutter = import_file(tbcut_file)
 
     shape = import_file(tb_file)
+    shape = union([shape, import_file(tbbtu_file)])
     sensor = import_file(sens_file)
-    cutter = import_file(tbcut_file)
-    cutter = union([cutter, import_file(senscut_file)])
+    cutter = import_file(senscut_file)
+    if trackball_bearing_type != 'R053010810':
+        cutter = union([cutter, import_file(tbcut_file)])
+    else:
+        cutter = union([cutter, import_file(tbbtu_file)])
 
     # return shape, cutter
     return shape, cutter, sensor
 
-def trackball_ball(segments=100, side="right"):
-    shape = sphere(ball_diameter / 2)
+def btu_cut(segments=100, side="right"):
+    shape = sphere(20000)
     return shape
 
 ################
@@ -3922,7 +3926,7 @@ def model_side(side="right"):
         if show_caps:
             shape = add([shape, ball])
 
-    if (trackball_in_wall or ('TRACKBALL' in thumb_style)) and (side == ball_side or ball_side == 'both'):
+    if 'TRACKBALL' in thumb_style and (side == ball_side or ball_side == 'both'):
         tbprecut, tb, tbcutout, sensor, ball = generate_trackball_in_cluster()
 
         shape = difference(shape, [tbprecut])
