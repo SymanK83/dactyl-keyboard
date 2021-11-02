@@ -10,8 +10,8 @@ r2d = 180 / pi
 
 shape_config = {
 
-    'ENGINE': 'solid', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
-    # 'ENGINE':  'cadquery', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    #'ENGINE': 'solid', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
+    'ENGINE':  'cadquery', # 'solid' = solid python / OpenSCAD, 'cadquery' = cadquery / OpenCascade
 
 
     ######################
@@ -113,7 +113,7 @@ shape_config = {
     'trackball_modular': False, # May add removable trackball in subsequent releases, no current use.
     # END EXPERIMENTAL
 
-    'trackball_bearing_type': 'R053010810', # 'ROLLER' Standard Ploopy, 'R053010810' Bosch Rexroth
+    'trackball_bearing_type': 'R053010810', # 'ROLLER' Standard Ploopy, 'R053010810' Bosch Rexroth BTU
     'trackball_Usize': 1.5,  # size for inner key near trackball
     'ball_side': 'both', #'left', 'right', or 'both'
     'ball_diameter': 34.0,
